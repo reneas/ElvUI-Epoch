@@ -1,5 +1,7 @@
 # ElvUI-Epoch-main
 
+**NOTE: No longer playing on epoch, use one of these versions instead. https://github.com/ElvUI-WotLK/ElvUI or https://github.com/Crumdidlyumshis/ElvUI**
+
 An ElvUI modification that prevents a crash on Project Epoch. 
 
 # Install Guide
