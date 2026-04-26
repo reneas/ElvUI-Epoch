@@ -7,6 +7,7 @@ An ElvUI modification for Project Epoch.
 1. Changed Current / Max behaviour to actually use "/" and not "-" as a separator
 2. Disabled ElvUI update checks
 3. Resizable Quest Log
+4. pfquest bugfix for randomizing minimap icons like mail, inkeeper to circles
 
 # Install Guide
 1. Download the Repo
