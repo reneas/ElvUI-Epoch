@@ -455,6 +455,61 @@ function M:Initialize()
 		pfUI.minimap = Minimap
 	end
 
+	-- Brighten pfQuest route dots by intercepting Minimap:CreateTexture so any
+	-- OVERLAY texture that pfQuest later marks with the route image gets 2× RGB.
+	do
+		local pfqRouteTextures = {}
+		local origCreateTexture = Minimap.CreateTexture
+		Minimap.CreateTexture = function(self, name, layer, ...)
+			local tex = origCreateTexture(self, name, layer, ...)
+			if layer == "OVERLAY" then
+				local origST  = tex.SetTexture
+				local origSVC = tex.SetVertexColor
+				tex.SetTexture = function(t, path, ...)
+					if type(path) == "string" and path:find("img\\route", 1, true) then
+						pfqRouteTextures[t] = true
+					end
+					return origST(t, path, ...)
+				end
+				tex.SetVertexColor = function(t, r, g, b, a)
+					if pfqRouteTextures[t] then
+						r = math.min(r * 2, 1)
+						g = math.min(g * 2, 1)
+						b = math.min(b * 2, 1)
+					end
+					return origSVC(t, r, g, b, a)
+				end
+			end
+			return tex
+		end
+	end
+
+	-- Fix pfQuest minimap icons turning into plain circles near the player.
+	-- pfMap.UpdateNode applies a proximity fade (alpha→0) whose fade zone scales
+	-- with minimap width, making icons invisible on ElvUI's larger minimap.
+	-- We hook UpdateNode to reset the spawn-guard and restore full alpha afterwards.
+	local pfQuestPatched = false
+	local function PatchPfQuestUpdateNode()
+		if pfQuestPatched or not (pfMap and pfMap.UpdateNode) then return end
+		local orig = pfMap.UpdateNode
+		pfMap.UpdateNode = function(self, frame, node, color, obj, distance)
+			frame.spawn = nil
+			orig(self, frame, node, color, obj, distance)
+			if obj == "minimap" then
+				frame.pic:SetAlpha(frame.defalpha or 1)
+			end
+		end
+		pfQuestPatched = true
+	end
+
+	PatchPfQuestUpdateNode()
+	local pfqLoader = CreateFrame("Frame")
+	pfqLoader:RegisterEvent("ADDON_LOADED")
+	pfqLoader:SetScript("OnEvent", function()
+		PatchPfQuestUpdateNode()
+		if pfQuestPatched then pfqLoader:UnregisterAllEvents() end
+	end)
+
 	local mmholder = CreateFrame("Frame", "MMHolder", Minimap)
 	mmholder:Point("TOPRIGHT", E.UIParent, "TOPRIGHT", -3, -3)
 	mmholder:Width((Minimap:GetWidth() + 29) + E.RBRWidth)
