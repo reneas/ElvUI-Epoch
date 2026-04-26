@@ -449,6 +449,12 @@ function M:Initialize()
 		return "SQUARE"
 	end
 
+	-- Tell pfQuest (if present) that we have a square minimap so it uses
+	-- rectangular bounds checks instead of circular ones, matching ElvUI's shape.
+	if pfUI then
+		pfUI.minimap = Minimap
+	end
+
 	local mmholder = CreateFrame("Frame", "MMHolder", Minimap)
 	mmholder:Point("TOPRIGHT", E.UIParent, "TOPRIGHT", -3, -3)
 	mmholder:Width((Minimap:GetWidth() + 29) + E.RBRWidth)
