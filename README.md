@@ -8,6 +8,7 @@ An ElvUI modification for Project Epoch.
 2. Disabled ElvUI update checks
 3. Resizable Quest Log
 4. pfquest bugfix for randomizing minimap icons like mail, inkeeper to circles
+5. pfquest minimap route made more visible
 
 # Install Guide
 1. Download the Repo
