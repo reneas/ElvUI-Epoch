@@ -114,6 +114,49 @@ S:AddCallback("Skin_Quest", function()
 		S:HandleCollapseExpandButton(questLogTitle, "+")
 	end
 
+	-- Resizable QuestLogFrame
+	QuestLogFrame:SetResizable(true)
+	QuestLogFrame:SetMinResize(500, 360)
+
+	local qlResize = CreateFrame("Button", nil, QuestLogFrame)
+	qlResize:SetPoint("BOTTOMRIGHT", -10, 10)
+	qlResize:SetSize(16, 16)
+	qlResize:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
+	qlResize:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
+	qlResize:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
+	qlResize:SetScript("OnMouseDown", function() QuestLogFrame:StartSizing("BOTTOMRIGHT") end)
+	qlResize:SetScript("OnMouseUp", function()
+		QuestLogFrame:StopMovingOrSizing()
+		E.global.questLogSize = { width = QuestLogFrame:GetWidth(), height = QuestLogFrame:GetHeight() }
+	end)
+
+	local function UpdateQuestLogLayout()
+		local frameW = QuestLogFrame:GetWidth()
+		local frameH = QuestLogFrame:GetHeight()
+		local scrollH = frameH - 111
+		local listW = frameW - 377
+		if listW < 80 then listW = 80 end
+
+		QuestLogScrollFrame:Width(listW)
+		QuestLogScrollFrame:Height(scrollH)
+		if QuestLogScrollFrame.scrollChild then
+			QuestLogScrollFrame.scrollChild:Width(listW)
+		end
+		QuestLogDetailScrollFrame:Height(scrollH)
+
+		for _, btn in ipairs(QuestLogScrollFrame.buttons or {}) do
+			btn:SetWidth(listW - 2)
+		end
+	end
+
+	QuestLogFrame:HookScript("OnSizeChanged", UpdateQuestLogLayout)
+	QuestLogFrame:HookScript("OnShow", function()
+		if E.global.questLogSize then
+			QuestLogFrame:SetSize(E.global.questLogSize.width, E.global.questLogSize.height)
+		end
+		UpdateQuestLogLayout()
+	end)
+
 	-- QuestLog Detail Frame
 	QuestLogDetailFrame:StripTextures()
 	QuestLogDetailFrame:Height(513)
