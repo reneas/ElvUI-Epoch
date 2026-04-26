@@ -3,9 +3,10 @@
 
 An ElvUI modification for Project Epoch. 
 
-#Small modifications made:
+# Small modifications made:
 1. Changed Current / Max behaviour to actually use "/" and not "-" as a separator
 2. Disabled ElvUI update checks
+3. Resizable Quest Log
 
 # Install Guide
 1. Download the Repo
