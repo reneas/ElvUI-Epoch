@@ -81,6 +81,19 @@ S:AddCallback("Skin_Spellbook", function()
 		E:RegisterCooldown(_G["SpellButton"..i.."Cooldown"])
 	end
 
+	hooksecurefunc("SpellBookFrame_SetTabType", function(tabButton, bookType)
+		if bookType == BOOKTYPE_PET then
+			local fallback = PET_TYPE_PET or "Pet"
+			local text = tabButton:GetText()
+			if not text or text == "" then
+				tabButton:SetText(fallback)
+			end
+			if not SpellBookFrame.petTitle or SpellBookFrame.petTitle == "" then
+				SpellBookFrame.petTitle = fallback
+			end
+		end
+	end)
+
 	hooksecurefunc("SpellButton_UpdateButton", function(self)
 		local name = self:GetName()
 		_G[name.."SpellName"]:SetTextColor(1, 0.80, 0.10)
