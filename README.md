@@ -9,6 +9,7 @@ An ElvUI modification for Project Epoch.
 3. Resizable Quest Log
 4. pfquest bugfix for randomizing minimap icons like mail, inkeeper to circles
 5. pfquest minimap route made more visible
+6. Spellbook empty tab name for Pets/Demons
 
 # Install Guide
 1. Download the Repo
