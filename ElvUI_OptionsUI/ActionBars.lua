@@ -135,6 +135,16 @@ local function BuildABConfig()
 					E:StaticPopup_Show("CONFIG_RL")
 				end
 			},
+			hideButtonBackdrops = {
+				order = 12.5,
+				type = "toggle",
+				name = L["Hide Button Backdrops"],
+				desc = L["Hides the ElvUI black backdrop on action buttons and uses the default WoW icons without cropping."],
+				set = function(info, value)
+					E.db.actionbar.hideButtonBackdrops = value
+					E:StaticPopup_Show("CONFIG_RL")
+				end
+			},
 			movementModifier = {
 				order = 13,
 				type = "select",

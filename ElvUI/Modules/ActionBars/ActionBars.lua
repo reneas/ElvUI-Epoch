@@ -555,13 +555,20 @@ function AB:StyleButton(button, noBackdrop, useMasque)
 	end
 
 	if not button.noBackdrop and not button.backdrop and not button.useMasque then
-		button:CreateBackdrop(self.db.transparentButtons and "Transparent", true)
-		button.backdrop:SetAllPoints()
+		if not self.db.hideButtonBackdrops then
+			button:CreateBackdrop(self.db.transparentButtons and "Transparent", true)
+			button.backdrop:SetAllPoints()
+		end
 	end
 
 	if icon then
-		icon:SetTexCoord(unpack(E.TexCoords))
-		icon:SetInside()
+		if self.db.hideButtonBackdrops then
+			icon:SetTexCoord(0, 1, 0, 1) -- Revert to default rounded WoW icon
+			icon:SetAllPoints()
+		else
+			icon:SetTexCoord(unpack(E.TexCoords))
+			icon:SetInside()
+		end
 	end
 
 	if self.db.hotkeytext or self.db.useRangeColorText then

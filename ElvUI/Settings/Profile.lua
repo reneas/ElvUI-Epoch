@@ -4155,6 +4155,7 @@ P.actionbar = {
 	movementModifier = "SHIFT",
 	transparentBackdrops = false,
 	transparentButtons = false,
+	hideButtonBackdrops = false,
 	globalFadeAlpha = 0,
 	lockActionBars = true,
 	rightClickSelfCast = false,
