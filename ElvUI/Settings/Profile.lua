@@ -303,6 +303,11 @@ P.nameplates = {
 	motionType = "OVERLAP",
 
 	lowHealthThreshold = 0.4,
+	executeIndicator = {
+		enable = false,
+		threshold = 0.2,
+		color = {r = 1, g = 0.2, b = 0.2, a = 0.9}
+	},
 
 	showFriendlyCombat = "DISABLED",
 	showEnemyCombat = "DISABLED",

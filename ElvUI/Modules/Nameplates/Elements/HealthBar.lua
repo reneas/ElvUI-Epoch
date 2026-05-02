@@ -152,6 +152,34 @@ function NP:Update_Health(frame)
 	end
 end
 
+function NP:Update_ExecuteThreshold(frame)
+	if not frame or not frame.UnitType or not frame.Health then return end
+
+	local indicator = frame.Health.ExecuteThreshold
+	if not indicator then return end
+
+	local db = self.db.executeIndicator
+	local enabled = db and db.enable
+	local showForUnit = frame.UnitType == "ENEMY_NPC" or frame.UnitType == "ENEMY_PLAYER"
+
+	if enabled and showForUnit and frame.Health:IsShown() then
+		local threshold = db.threshold or 0.2
+		local width = frame.Health:GetWidth()
+		local lineWidth = (E.mult and E.mult > 0) and E.mult or 1
+		local offset = width * threshold
+		local color = db.color or {r = 1, g = 0.2, b = 0.2, a = 0.9}
+
+		indicator:ClearAllPoints()
+		indicator:SetPoint("TOP", frame.Health, "TOPLEFT", offset, 0)
+		indicator:SetPoint("BOTTOM", frame.Health, "BOTTOMLEFT", offset, 0)
+		indicator:SetWidth(lineWidth)
+		indicator:SetVertexColor(color.r, color.g, color.b, color.a or 1)
+		indicator:Show()
+	else
+		indicator:Hide()
+	end
+end
+
 function NP:RegisterHealthBarCallbacks(frame, valueChangeCB, colorChangeCB)
 	if valueChangeCB then
 		frame.HealthValueChangeCallbacks = frame.HealthValueChangeCallbacks or {}
@@ -170,6 +198,8 @@ function NP:Update_HealthBar(frame)
 	else
 		frame.Health:Hide()
 	end
+
+	self:Update_ExecuteThreshold(frame)
 end
 
 function NP:Configure_HealthBarScale(frame, scale, noPlayAnimation)
@@ -209,12 +239,15 @@ function NP:Configure_HealthBar(frame, configuring)
 			healthBar.Text:Hide()
 		end
 	end
+
+	self:Update_ExecuteThreshold(frame)
 end
 
 local function HealthBar_OnSizeChanged(self, width)
 	local health = self:GetValue()
 	local _, maxHealth = self:GetMinMaxValues()
 	self:GetStatusBarTexture():SetPoint("TOPRIGHT", -(width * ((maxHealth - health) / maxHealth)), 0)
+	NP:Update_ExecuteThreshold(self:GetParent())
 end
 
 function NP:Construct_HealthBar(parent)
@@ -229,6 +262,10 @@ function NP:Construct_HealthBar(parent)
 	parent.FlashTexture:Point("BOTTOMLEFT", frame:GetStatusBarTexture(), "BOTTOMLEFT")
 	parent.FlashTexture:Point("TOPRIGHT", frame:GetStatusBarTexture(), "TOPRIGHT")
 	parent.FlashTexture:Hide()
+
+	frame.ExecuteThreshold = frame:CreateTexture(nil, "OVERLAY")
+	frame.ExecuteThreshold:SetTexture(LSM:Fetch("background", "ElvUI Blank"))
+	frame.ExecuteThreshold:Hide()
 
 	frame.Text = frame:CreateFontString(nil, "OVERLAY")
 	frame.Text:SetAllPoints(frame)

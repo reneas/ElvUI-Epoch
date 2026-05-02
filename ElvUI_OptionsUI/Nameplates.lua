@@ -3579,8 +3579,19 @@ E.Options.args.nameplate = {
 							isPercent = true,
 							min = 0, max = 1, step = 0.01
 						},
-						showEnemyCombat = {
+						executeIndicator = {
 							order = 5,
+							type = "toggle",
+							name = L["Execute Threshold"],
+							desc = L["Show a 20% execute marker on enemy nameplate health bars."],
+							get = function() return E.db.nameplates.executeIndicator.enable end,
+							set = function(info, value)
+								E.db.nameplates.executeIndicator.enable = value
+								NP:ConfigureAll()
+							end
+						},
+						showEnemyCombat = {
+							order = 6,
 							type = "select",
 							name = L["Enemy Combat Toggle"],
 							desc = L["Control enemy nameplates toggling on or off when in combat."],
@@ -3595,7 +3606,7 @@ E.Options.args.nameplate = {
 							end
 						},
 						showFriendlyCombat = {
-							order = 6,
+							order = 7,
 							type = "select",
 							name = L["Friendly Combat Toggle"],
 							desc = L["Control friendly nameplates toggling on or off when in combat."],
@@ -3610,7 +3621,7 @@ E.Options.args.nameplate = {
 							end
 						},
 						resetFilters = {
-							order = 7,
+							order = 8,
 							type = "execute",
 							name = L["Reset Aura Filters"],
 							func = function(info, value)
@@ -3618,12 +3629,12 @@ E.Options.args.nameplate = {
 							end
 						},
 						fadeIn = {
-							order = 8,
+							order = 9,
 							type = "toggle",
 							name = L["Alpha Fading"]
 						},
 						smoothbars = {
-							order = 9,
+							order = 10,
 							type = "toggle",
 							name = L["Smooth Bars"],
 							desc = L["Bars will transition smoothly."],
@@ -3633,12 +3644,12 @@ E.Options.args.nameplate = {
 							end
 						},
 						highlight = {
-							order = 10,
+							order = 11,
 							type = "toggle",
 							name = L["Hover Highlight"]
 						},
 						nameColoredGlow = {
-							order = 11,
+							order = 12,
 							type = "toggle",
 							name = L["Name Colored Glow"],
 							desc = L["Use the Name Color of the unit for the Name Glow."],
