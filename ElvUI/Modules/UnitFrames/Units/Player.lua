@@ -25,6 +25,7 @@ function UF:Construct_PlayerFrame(frame)
 	frame.Portrait2D = self:Construct_Portrait(frame, "texture")
 	frame.Buffs = self:Construct_Buffs(frame)
 	frame.Debuffs = self:Construct_Debuffs(frame)
+	frame.AuraWatch = self:Construct_AuraWatch(frame)
 	frame.Castbar = self:Construct_Castbar(frame, L["Player Castbar"])
 
 	--Create a holder frame all "classbars" can be positioned into
@@ -189,6 +190,9 @@ function UF:Update_PlayerFrame(frame, db)
 
 	--CustomTexts
 	UF:Configure_CustomTexts(frame)
+
+	--BuffIndicator
+	UF:UpdateAuraWatch(frame)
 
 	E:SetMoverSnapOffset(frame:GetName().."Mover", -(12 + db.castbar.height))
 	frame:UpdateAllElements("ForceUpdate")

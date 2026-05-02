@@ -1390,6 +1390,12 @@ P.unitframe = {
 			width = 270,
 			height = 54,
 			lowmana = 30,
+                        buffIndicator = {
+                                enable = true,
+                                size = 8,
+                                fontSize = 10,
+                                profileSpecific = false
+                        },
 			healPrediction = {
 				enable = true
 			},

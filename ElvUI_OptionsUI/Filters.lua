@@ -661,6 +661,7 @@ local function UpdateFilterGroup()
 							UF:UpdateAuraWatchFromHeader("raid")
 							UF:UpdateAuraWatchFromHeader("raid40")
 							UF:UpdateAuraWatchFromHeader("party")
+							if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 							UF:UpdateAuraWatchFromHeader("raidpet", true)
 						end
 					end
@@ -683,6 +684,7 @@ local function UpdateFilterGroup()
 						UF:UpdateAuraWatchFromHeader("raid")
 						UF:UpdateAuraWatchFromHeader("raid40")
 						UF:UpdateAuraWatchFromHeader("party")
+						if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 						UF:UpdateAuraWatchFromHeader("raidpet", true)
 					end,
 					disabled = function() return not selectedSpell end
@@ -767,6 +769,7 @@ local function UpdateFilterGroup()
 					UF:UpdateAuraWatchFromHeader("raid")
 					UF:UpdateAuraWatchFromHeader("raid40")
 					UF:UpdateAuraWatchFromHeader("party")
+					if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 					UF:UpdateAuraWatchFromHeader("raidpet", true)
 				end,
 				args = {
@@ -832,6 +835,7 @@ local function UpdateFilterGroup()
 							UF:UpdateAuraWatchFromHeader("raid")
 							UF:UpdateAuraWatchFromHeader("raid40")
 							UF:UpdateAuraWatchFromHeader("party")
+							if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 							UF:UpdateAuraWatchFromHeader("raidpet", true)
 						end
 					},
@@ -859,6 +863,7 @@ local function UpdateFilterGroup()
 							UF:UpdateAuraWatchFromHeader("raid")
 							UF:UpdateAuraWatchFromHeader("raid40")
 							UF:UpdateAuraWatchFromHeader("party")
+							if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 							UF:UpdateAuraWatchFromHeader("raidpet", true)
 						end
 					},
@@ -916,6 +921,7 @@ local function UpdateFilterGroup()
 							UF:UpdateAuraWatchFromHeader("raid")
 							UF:UpdateAuraWatchFromHeader("raid40")
 							UF:UpdateAuraWatchFromHeader("party")
+							if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 						end
 					end
 				},
@@ -937,6 +943,7 @@ local function UpdateFilterGroup()
 						UF:UpdateAuraWatchFromHeader("raid")
 						UF:UpdateAuraWatchFromHeader("raid40")
 						UF:UpdateAuraWatchFromHeader("party")
+						if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 					end,
 					disabled = function() return not selectedSpell end
 				},
@@ -1025,6 +1032,7 @@ local function UpdateFilterGroup()
 					UF:UpdateAuraWatchFromHeader("raid")
 					UF:UpdateAuraWatchFromHeader("raid40")
 					UF:UpdateAuraWatchFromHeader("party")
+					if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 				end,
 				args = {
 					enabled = {
@@ -1091,6 +1099,7 @@ local function UpdateFilterGroup()
 							UF:UpdateAuraWatchFromHeader("raid")
 							UF:UpdateAuraWatchFromHeader("raid40")
 							UF:UpdateAuraWatchFromHeader("party")
+							if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 						end
 					},
 					displayText = {
@@ -1118,6 +1127,7 @@ local function UpdateFilterGroup()
 							UF:UpdateAuraWatchFromHeader("raid")
 							UF:UpdateAuraWatchFromHeader("raid40")
 							UF:UpdateAuraWatchFromHeader("party")
+							if _G.ElvUF_Player then UF:UpdateAuraWatch(_G.ElvUF_Player) end
 						end
 					},
 					decimalThreshold = {

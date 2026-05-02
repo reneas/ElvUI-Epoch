@@ -3666,6 +3666,51 @@ E.Options.args.unitframe.args.player = {
 			name = L["Restore Defaults"],
 			func = function(info) E:StaticPopup_Show("RESET_UF_UNIT", L["Player"], nil, {unit="player", mover="Player Frame"}) end
 		},
+		buffIndicator = {
+			order = 600,
+			type = "group",
+			name = L["Buff Indicator"],
+			get = function(info) return E.db.unitframe.units.player.buffIndicator[info[#info]] end,
+			set = function(info, value) E.db.unitframe.units.player.buffIndicator[info[#info]] = value UF:CreateAndUpdateUF("player") end,
+			args = {
+				enable = {
+					type = "toggle",
+					name = L["Enable"],
+					order = 1
+				},
+				size = {
+					type = "range",
+					name = L["Size"],
+					desc = L["Size of the indicator icon."],
+					order = 2,
+					min = 4, max = 50, step = 1
+				},
+				fontSize = {
+					type = "range",
+					name = L["FONT_SIZE"],
+					order = 3,
+					min = 7, max = 22, step = 1
+				},
+				profileSpecific = {
+					type = "toggle",
+					name = L["Profile Specific"],
+					desc = L["Use the profile specific filter 'Buff Indicator (Profile)' instead of the global filter 'Buff Indicator'."],
+					order = 4
+				},
+				configureButton = {
+					type = "execute",
+					name = L["Configure Auras"],
+					func = function()
+						if E.db.unitframe.units.player.buffIndicator.profileSpecific then
+							E:SetToFilterConfig("Buff Indicator (Profile)")
+						else
+							E:SetToFilterConfig("Buff Indicator")
+						end
+					end,
+					order = 5
+				}
+			}
+		},
 		copyFrom = {
 			order = 4,
 			type = "select",
