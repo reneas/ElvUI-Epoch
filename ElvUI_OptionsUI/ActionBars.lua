@@ -76,6 +76,7 @@ local function BuildABConfig()
 				order = 7,
 				type = "toggle",
 				name = L["RightClick Self-Cast"],
+				desc = L["Allows you to self-cast spells by right-clicking them on the action bar."],
 				set = function(info, value)
 					E.db.actionbar.rightClickSelfCast = value
 					for _, bar in pairs(AB.handledBars) do
@@ -108,6 +109,7 @@ local function BuildABConfig()
 				order = 10,
 				type = "toggle",
 				name = L["Desaturate Cooldowns"],
+				desc = L["Turns the action button icon grayscale while the ability is on cooldown."],
 				set = function(info, value)
 					E.db.actionbar.desaturateOnCooldown = value
 					AB:ToggleDesaturation(value)
@@ -117,6 +119,7 @@ local function BuildABConfig()
 				order = 11,
 				type = "toggle",
 				name = L["Transparent Backdrops"],
+				desc = L["Makes the action bar backgrounds transparent (Requires a UI reload)."],
 				set = function(info, value)
 					E.db.actionbar.transparentBackdrops = value
 					E:StaticPopup_Show("CONFIG_RL")
@@ -126,6 +129,7 @@ local function BuildABConfig()
 				order = 12,
 				type = "toggle",
 				name = L["Transparent Buttons"],
+				desc = L["Makes the action buttons themselves transparent (Requires a UI reload)."],
 				set = function(info, value)
 					E.db.actionbar.transparentButtons = value
 					E:StaticPopup_Show("CONFIG_RL")
