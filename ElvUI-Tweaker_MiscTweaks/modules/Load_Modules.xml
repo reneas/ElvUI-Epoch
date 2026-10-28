@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <!-- Modules loader for MiscTweaks. -->
+    <Script file="EmbedTweaks.lua"/>
+    <Script file="FiveSecondRule.lua"/>
+    <Script file="GameTimeDisplay.lua"/>
+    <Script file="TooltipAnchor.lua"/>
+    <Script file="ShapeshiftRemover.lua"/>
+    <Script file="ChatEditboxMover.lua"/>
+    <Script file="VendorTweaks.lua"/>
+    <Script file="BagSwap.lua"/>
+    <Script file="MicrobarTweaks.lua"/>
+    <Script file="RollSave.lua"/>
+</Ui>

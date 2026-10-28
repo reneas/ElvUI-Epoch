@@ -1,0 +1,2 @@
+AwesomeWotLK is strongly reccomended - https://github.com/noname08662/awesome_wotlk or https://github.com/FrostAtom/awesome_wotlk
+Toolkit.lua - instructions are to be found in the General -> Misc section of the plugin
